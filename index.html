@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo Webseite</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --nav: #f0f0f0;
+      --accent: #4f46e5;
+    }
+
+    body.dark {
+      --bg: #0f172a;
+      --text: #e5e7eb;
+      --nav: #020617;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    nav {
+      background: var(--nav);
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    nav .title {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .nav-items {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-items a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      position: relative;
+    }
+
+    .nav-items a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.2s ease;
+    }
+
+    .nav-items a:hover::after {
+      width: 100%;
+    }
+
+    nav button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      z-index: 100;
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      background: var(--accent);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 0 8px 8px 0;
+      position: relative;
+    }
+
+    
+
+    
+
+    /* Main */
+    main {
+      flex: 1;
+      padding: 2rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--nav);
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .page {
+      display: none;
+      animation: fade 0.3s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .side-panel {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 260px;
+      height: 100vh;
+      background: var(--nav);
+      padding: 1rem;
+      transition: left 0.3s ease;
+      z-index: 99;
+    }
+
+    .side-panel.open {
+      left: 48px;
+    }
+
+    .side-panel input {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .side-panel ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .side-panel li {
+      cursor: pointer;
+      padding: 0.4rem;
+      border-radius: 4px;
+    }
+
+    .side-panel li:hover {
+      background: var(--accent);
+      color: white;
+    }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="title">Meine Webseite</div>
+    <ul class="nav-items">
+      <li><a href="#" onclick="showPage('home')">Home</a></li>
+      <li><a href="#" onclick="showPage('about')">Über uns</a></li>
+      <li><a href="#" onclick="showPage('services')">Services</a></li>
+      <li><a href="#" onclick="showPage('contact')">Kontakt</a></li>
+    </ul>
+    <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+  </nav>
+
+  <div class="sidebar">
+    <div class="icon" onmouseenter="openSidePanel()">🏠</div>
+    <div class="icon" onmouseenter="openSidePanel()">☰</div>
+  </div>
+
+  <div class="side-panel" id="sidePanel" onmouseleave="closeSidePanel()">
+    <input type="text" placeholder="Suchen..." />
+    <ul>
+      <li>Kontakt</li>
+      <li>News</li>
+      <li>Profil</li>
+      <li>Einstellungen</li>
+    </ul>
+  </div>
+    <div class="icon">☰<span>Platzhalter 2</span></div>
+    <div class="icon">★<span>Platzhalter 3</span></div>
+  </div>
+
+  <main>
+    <section id="home" class="page active">
+      <h1>Home</h1>
+      <p>Dies ist der Home‑Platzhalter.</p>
+    </section>
+
+    <section id="about" class="page">
+      <h1>Über uns</h1>
+      <p>Platzhaltertext für die Über‑uns‑Seite.</p>
+    </section>
+
+    <section id="services" class="page">
+      <h1>Services</h1>
+      <p>Hier kommen später deine Services rein.</p>
+    </section>
+
+    <section id="contact" class="page">
+      <h1>Kontakt</h1>
+      <p>Kontakt‑Platzhalter.</p>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 – Footer Bereich
+  </footer>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+    }
+
+    function openSidePanel() {
+      document.getElementById('sidePanel').classList.add('open');
+    }
+
+    function closeSidePanel() {
+      document.getElementById('sidePanel').classList.remove('open');
+    }
+
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+</body>
+</html>
